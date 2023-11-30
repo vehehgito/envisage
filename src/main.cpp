@@ -1,3 +1,5 @@
+#include "volt_lib.h"
+
 // ###########################
 // Platform Global Variables
 // ###########################
@@ -29,6 +31,30 @@ static HWND window;
 // ###########################
 // Platform Implementation
 // ###########################
+
+LRESULT CALLBACK windows_window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    LRESULT result = 0;
+
+    switch(uMsg)
+    {
+        case WM_CLOSE:
+        case WM_DESTROY:
+        {
+            running = false;
+            break;           
+        } 
+
+        default:
+        {
+            result = DefWindowProcA(hwnd, uMsg, wParam, lParam);
+            break;
+        }
+    }
+
+    return result;
+}
+
 bool platform_create_window(int width, int height, char* title)
 {
     HINSTANCE instance = GetModuleHandleA(0);
@@ -38,7 +64,7 @@ bool platform_create_window(int width, int height, char* title)
     wc.hIcon = LoadIcon(instance, IDI_APPLICATION);
     wc.hCursor = LoadCursor(NULL, IDC_ARROW);
     wc.lpszClassName = title;
-    wc.lpfnWndProc = DefWindowProcA;
+    wc.lpfnWndProc = windows_window_callback;
 
     if(!RegisterClassA(&wc))
     {
