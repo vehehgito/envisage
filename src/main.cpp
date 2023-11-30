@@ -26,7 +26,8 @@ void platform_update_window();
 // Windows Globals
 // ###########################
 
-static HWND window; 
+static HWND window;
+static HDC dc;
 
 // ###########################
 // Platform Implementation
@@ -113,6 +114,11 @@ int main()
     while(running)
     {
         platform_update_window();
+
+        SM_TRACE("Hello World");
+        SM_WARN("Test");
+        SM_ERROR("Test");
+        SM_ASSERT(false, "Assertion not hit!");
     }
 
     return 0;
