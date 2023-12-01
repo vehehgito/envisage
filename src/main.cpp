@@ -115,10 +115,6 @@ int main()
     {
         platform_update_window();
 
-        SM_TRACE("Hello World");
-        SM_WARN("Test");
-        SM_ERROR("Test");
-        SM_ASSERT(false, "Assertion not hit!");
     }
 
     return 0;
