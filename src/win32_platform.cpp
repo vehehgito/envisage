@@ -87,3 +87,20 @@ void platform_update_window()
         DispatchMessageA(&msg);
     }
 }
+
+void* platform_load_gl_function(char* funName)
+{
+    PROC proc = wglGetProcAddress("funName");
+
+        if(!proc)
+        {
+            static HMODULE openglDLL = LoadLibraryA("opengl32.dll");
+            proc = GetProcAddress(openglDLL, funName);
+            if (!proc)
+            {
+                SM_ASSERT(false, "Failed to load GL function%s", "glCreateProgram");
+            }
+        }
+
+    return (void*)proc;
+}
