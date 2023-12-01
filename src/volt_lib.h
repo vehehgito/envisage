@@ -95,3 +95,60 @@ void _log(char* prefix, char* msg, TextColor textColor, Args... args)
     SM_ERROR("Assertion HIT!")    \
   }                               \
 }
+
+// ###########################
+// Bump Allocator
+// ###########################
+
+struct BumpAllocator
+{
+  size_t capacity;
+  size_t used;
+  char* memory;
+};
+
+BumpAllocator make_bump_allocator(size_t size)
+{
+  BumpAllocator ba = {};
+
+  ba.memory = (char*)malloc(size);
+
+  if(ba.memory)
+  {
+    ba.capacity = size;
+    memset(ba.memory, 0, size);
+  }
+  else
+  {
+    SM_ASSERT(false, "Failed to allocate memory for BumpAllocator!");
+  }
+
+  return ba;
+
+  ba.capacity = size; 
+}
+
+char* bump_alloc(BumpAllocator* bumpAllocator, size_t size)
+{
+  char* result = nullptr;
+
+  size_t alignedSize = size + (size + 7) & ~7;
+
+  if(bumpAllocator->used + alignedSize <= bumpAllocator->capacity)
+  {
+    result = bumpAllocator->memory + bumpAllocator->used;
+    bumpAllocator->used += alignedSize;
+  }
+  else
+  {
+    SM_ASSERT(false, "BumpAllocator out of memory!");
+  }
+
+  return result;
+}
+
+// ###########################
+// File I/O
+// ###########################
+
+
