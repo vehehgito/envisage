@@ -1,13 +1,13 @@
 #pragma once
 
 // ###########################
-// Platform Global Variables
+//  Platform Global Variables
 // ###########################
 
 static bool running = true;
 
 // ###########################
-// Platform Functions
+//      Platform Funcs
 // ###########################
 
 bool platform_create_window(int width, int height, char* title);

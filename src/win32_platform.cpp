@@ -7,14 +7,14 @@
 #include <windows.h>
 
 // ###########################
-// Windows Globals
+//      Windows Gloabals
 // ###########################
 
 static HWND window;
 static HDC dc;
 
 // ###########################
-// Platform Implementation
+//   Platform Implementation
 // ###########################
 
 LRESULT CALLBACK windows_window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

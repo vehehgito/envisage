@@ -2,9 +2,9 @@
  
 #include "glcorearb.h"
  
-// #############################################################################
-//                           OpenGL Function Pointers
-// #############################################################################
+// ###########################
+//      OpenGL Func Ptrs
+// ###########################
 static PFNGLCREATEPROGRAMPROC glCreateProgram_ptr;
 static PFNGLDELETETEXTURESPROC glDeleteTextures_ptr;
 static PFNGLGENTEXTURESPROC glGenTextures_ptr;
@@ -60,10 +60,12 @@ static PFNGLDRAWELEMENTSINSTANCEDPROC glDrawElementsInstanced_ptr;
 static PFNGLGENERATEMIPMAPPROC glGenerateMipmap_ptr;
 static PFNGLDEBUGMESSAGECALLBACKPROC glDebugMessageCallback_ptr;
  
- 
+// ###########################
+//    Loading funcs from OS
+// ###########################
+
 void load_gl_functions()
 {
-  // Load OpenGL Functions from the Operating System
   glCreateProgram_ptr = (PFNGLCREATEPROGRAMPROC)platform_load_gl_function("glCreateProgram");
   glDeleteTextures_ptr = (PFNGLDELETETEXTURESPROC)platform_load_gl_function("glDeleteTextures");
   glGenTextures_ptr = (PFNGLGENTEXTURESPROC)platform_load_gl_function("glGenTextures");
@@ -119,9 +121,9 @@ void load_gl_functions()
   glDebugMessageCallback_ptr = (PFNGLDEBUGMESSAGECALLBACKPROC)platform_load_gl_function("glDebugMessageCallback");
 }
  
-// #############################################################################
-//                           OpenGL Function Wrappers
-// #############################################################################
+// ###########################
+//    OpenGL Func Wrappers
+// ###########################
 GLAPI GLuint APIENTRY glCreateProgram (void)
 {
   return glCreateProgram_ptr();

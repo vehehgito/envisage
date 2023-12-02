@@ -11,7 +11,7 @@
 #include <math.h>
 
 // ###########################
-// Defines
+//           Defines
 // ###########################
 
 #ifdef _WIN32
@@ -26,7 +26,7 @@
 #endif
 
 // ###########################
-// Logging
+//           Logging
 // ###########################
 
 enum TextColor
@@ -97,7 +97,7 @@ void _log(char* prefix, char* msg, TextColor textColor, Args... args)
 }
 
 // ###########################
-// Bump Allocator
+//       Bump Allocator
 // ###########################
 
 struct BumpAllocator
@@ -148,7 +148,7 @@ char* bump_alloc(BumpAllocator* bumpAllocator, size_t size)
 }
 
 // ###########################
-// File I/O
+//          File I/O
 // ###########################
 
 long long get_timestamp(const char* file)
@@ -286,7 +286,3 @@ bool copy_file(const char* fileName, const char* outputName, BumpAllocator* bump
 
   return false;
 }
-
-// ###########################
-// 
-// ###########################

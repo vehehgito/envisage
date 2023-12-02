@@ -6,7 +6,7 @@
 #include "glcorearb.h"
 
 // ###########################
-// Windows Platform
+//      Windows Platform
 // ###########################
 
 #ifdef _WIN32
