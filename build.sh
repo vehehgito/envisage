@@ -1,6 +1,6 @@
 #!/bin/bash
 
-libs="-luser32 -lopengl32";
+libs="-luser32 -lopengl32 -lgdi32";
 
 warnings="-Wno-writable-strings -Wno-format-security"
 
