@@ -1,5 +1,6 @@
-#include "volt_lib.h"
 #include "platform.h"
+#include "volt_lib.h"
+
 
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX

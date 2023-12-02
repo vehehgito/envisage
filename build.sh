@@ -1,7 +1,9 @@
 #!/bin/bash
 
-libs=-luser32
-warnings=-Wno-writable-strings
+libs="-luser32 -lopengl32";
 
-clang src/main.cpp -ovolt.exe $libs $warnings
+warnings="-Wno-writable-strings -Wno-format-security"
 
+includes="-Ithird_party -Ithird_party/Include"
+
+clang++ $includes -g src/main.cpp -ovolt.exe $libs $warnings
