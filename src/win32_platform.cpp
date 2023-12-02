@@ -25,11 +25,19 @@ LRESULT CALLBACK windows_window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LP
     switch(uMsg)
     {
         case WM_CLOSE:
-        case WM_DESTROY:
         {
             running = false;
             break;           
         } 
+
+        case WM_SIZE:
+        {
+            RECT rect = {};
+            GetClientRect(window, &rect);
+            input.screenSizeX = rect.right - rect.left;
+            input.screenSizeY = rect.bottom - rect.top;
+            break;
+        }
 
         default:
         {

@@ -1,5 +1,7 @@
 #include "volt_lib.h"
 
+#include "input.h"
+
 #include "platform.h"
 
 #define APIENTRY
@@ -25,12 +27,15 @@ int main()
     BumpAllocator transientStorage = make_bump_allocator(MB(50));
 
     platform_create_window(1200, 720, "Volt Engine v1.0.0");
+    input.screenSizeX = 1200;
+    input.screenSizeY = 720;
 
     gl_init(&transientStorage);
 
     while(running)
     {
         platform_update_window();
+        gl_render();
     }
 
     return 0;
