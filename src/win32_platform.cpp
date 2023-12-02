@@ -179,8 +179,8 @@ bool platform_create_window(int width, int height, char* title)
             return false;
         }
 
-        HDC fakeDC = GetDC(window);
-        if(!fakeDC)
+        dc = GetDC(window);
+        if(!dc)
         {
             SM_ASSERT(false, "Failed to get HDC");
             return false;
@@ -275,4 +275,9 @@ void* platform_load_gl_function(char* funName)
         }
 
     return (void*)proc;
+}
+
+void platform_swap_buffers()
+{
+    SwapBuffers(dc);
 }
