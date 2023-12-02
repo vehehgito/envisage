@@ -5,6 +5,7 @@
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 #include <windows.h>
+#include <xaudio2.h>
 #include "wglext.h"
 
 // ###########################
@@ -13,16 +14,17 @@
 
 static HWND window;
 static HDC dc;
+static PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT_ptr;
 
 // ###########################
 //   Platform Implementation
 // ###########################
 
-LRESULT CALLBACK windows_window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK windows_window_callback(HWND window, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     LRESULT result = 0;
 
-    switch(uMsg)
+    switch(msg)
     {
         case WM_CLOSE:
         {
@@ -41,8 +43,7 @@ LRESULT CALLBACK windows_window_callback(HWND hwnd, UINT uMsg, WPARAM wParam, LP
 
         default:
         {
-            result = DefWindowProcA(hwnd, uMsg, wParam, lParam);
-            break;
+            result = DefWindowProcA(window, msg, wParam, lParam);
         }
     }
 
@@ -182,7 +183,7 @@ bool platform_create_window(int width, int height, char* title)
         dc = GetDC(window);
         if(!dc)
         {
-            SM_ASSERT(false, "Failed to get HDC");
+            SM_ASSERT(false, "Failed to get DC");
             return false;
         }
 
@@ -270,7 +271,8 @@ void* platform_load_gl_function(char* funName)
             proc = GetProcAddress(openglDLL, funName);
             if (!proc)
             {
-                SM_ASSERT(false, "Failed to load GL function%s", "glCreateProgram");
+                SM_ASSERT(false, "Failed to load GL function %s", "glCreateProgram");
+                return nullptr;
             }
         }
 
