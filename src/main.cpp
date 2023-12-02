@@ -1,6 +1,6 @@
-#include "platform.h"
-
 #include "volt_lib.h"
+
+#include "platform.h"
 
 #define APIENTRY
 #define GL_GLEXT_PROTOTYPES
@@ -16,13 +16,17 @@
 
 #include "gl_renderer.cpp"
 
+// ###########################
+//        Main Function
+// ###########################
+
 int main()
 {   
     BumpAllocator transientStorage = make_bump_allocator(MB(50));
 
     platform_create_window(1200, 720, "Volt Engine v1.0.0");
 
-    gl_init(BumpAllocator* transientStorage);
+    gl_init(&transientStorage);
 
     while(running)
     {
