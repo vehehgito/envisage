@@ -1,7 +1,6 @@
 #include "platform.h"
 #include "volt_lib.h"
 
-
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 #include <windows.h>
@@ -60,6 +59,7 @@ bool platform_create_window(int width, int height, char* title)
     wc.hCursor = LoadCursor(NULL, IDC_ARROW);
     wc.lpszClassName = title;                       // This is NOT the title, just a unique identifier(ID)
     wc.lpfnWndProc = windows_window_callback;
+   
     if(!RegisterClassA(&wc))
     {
         return false;
@@ -87,7 +87,7 @@ bool platform_create_window(int width, int height, char* title)
 
         if(window == NULL)
         {
-            SM_ASSERT(false, "Failed to create Windows Window");
+            SM_ASSERT(false, "Failed to create Windows window");
             return false;
         }
 
@@ -263,7 +263,7 @@ void platform_update_window()
 
 void* platform_load_gl_function(char* funName)
 {
-    PROC proc = wglGetProcAddress("funName");
+    PROC proc = wglGetProcAddress(funName);
 
         if(!proc)
         {
@@ -271,7 +271,7 @@ void* platform_load_gl_function(char* funName)
             proc = GetProcAddress(openglDLL, funName);
             if (!proc)
             {
-                SM_ASSERT(false, "Failed to load GL function %s", "glCreateProgram");
+                SM_ASSERT(false, "Failed to load GL function glCreateProgram");
                 return nullptr;
             }
         }
