@@ -261,6 +261,8 @@ void platform_update_window()
     }
 }
 
+//Dummy comment
+
 void* platform_load_gl_function(char* funName)
 {
     PROC proc = wglGetProcAddress(funName);
